@@ -12,14 +12,10 @@ namespace MortgageCalculator.Helpers
         #region Get Payments
         public Loan GetPayments(Loan loan)
         {
-          
-
-            // calc monthly payments
-            loan.Payment = CalculateMonthlyPayment(loan.LoanAmount, loan.LoanInterest, loan.LoanTerm);
+            loan.LoanAmount = loan.TotalMortgageCost - loan.PayDown;
 
 
-
-            decimal avoidPMI = loan.LoanAmount * 0.2m;
+            decimal avoidPMI = loan.TotalMortgageCost * 0.2m;
             loan.LoanAmount -= loan.PayDown;
 
             if (loan.PayDown < avoidPMI)
@@ -30,9 +26,13 @@ namespace MortgageCalculator.Helpers
             }
             else
             {
+               
                 loan.PMIRequired = false;
             }
 
+
+            // calc monthly payments
+            loan.Payment = CalculateMonthlyPayment(loan.LoanAmount, loan.LoanInterest, loan.LoanTerm);
 
 
             var balance = loan.LoanAmount;

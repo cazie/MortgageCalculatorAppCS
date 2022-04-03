@@ -9,18 +9,18 @@ using MortgageCalculator.Models;
 
 namespace MortgageCalculator.Pages
 {
-    public class LoanModel : PageModel
+    public class MortgageModel : PageModel
     {
         private readonly MortgageHelper _mortgageHelper;
 
-        public LoanModel(MortgageHelper loanhelper)
+        public MortgageModel(MortgageHelper loanhelper)
         {
             _mortgageHelper = loanhelper;
         }
 
         [BindProperty(SupportsGet = true)]
         public Loan Loan { get; set; }
-        //public LoanPayment Payment { get; set; }
+       
 
         public void OnGet()
         {

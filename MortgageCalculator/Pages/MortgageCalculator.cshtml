@@ -1,5 +1,5 @@
 ﻿@page
-@model MortgageCalculator.Pages.LoanModel
+@model MortgageCalculator.Pages.MortgageModel
 @{
 }
 
@@ -32,23 +32,30 @@
             <div>
                 <form class="row gy-2 gx-3" method="post">
                     <div class="form-row">
+
                         <div class="col-12 form-group">
-                            <label asp-for="Loan.LoanAmount">Property Price</label>
-                            <input type="number" asp-for="Loan.LoanAmount" class="form-control" value="@Model.Loan.LoanAmount" placeholder="15000" min="1000" step="500" />
+                            <label asp-for="Loan.TotalMortgageCost">Property Price</label>
+                            <input type="number" asp-for="Loan.TotalMortgageCost" class="form-control" value="@Model.Loan.TotalMortgageCost" placeholder="15000" min="1000" step="500"  max="100_000_000" />
                         </div>
                         <div class="col-12 form-group">
                             <label asp-for="Loan.PayDown">Down Payment</label>
-                            <input type="number" asp-for="Loan.PayDown" class="form-control" value="@Model.Loan.PayDown" placeholder="Pay Down" min="0" step="100" />
+                            <input type="number" asp-for="Loan.PayDown" class="form-control" value="@Model.Loan.PayDown" placeholder="Pay Down" min="0" step="100"  max="100_000_000"/>
                         </div>
+
+                        <div class="col-12 form-group">
+                            <label asp-for="Loan.LoanAmount" class="text-success">@Model.Loan.LoanAmount</label>
+                         
+                        </div>
+
                         <div class="col-12 form-group">
                             <label asp-for="Loan.LoanTerm">Loan Term (months)</label>
-                            <input type="number" asp-for="Loan.LoanTerm" class="form-control" value="@Model.Loan.LoanTerm" placeholder="Loan Term" min="12" />
+                            <input type="number" asp-for="Loan.LoanTerm" class="form-control" value="@Model.Loan.LoanTerm" placeholder="Loan Term" min="12" max="600" />
                         </div>
                         <div class="col-12 form-group">
                             <label asp-for="Loan.LoanInterest">Loan Interest</label>
-                            <input type="number" asp-for="Loan.LoanInterest" class="form-control" value="@Model.Loan.LoanInterest" placeholder="Loan Interest" min="1" step=".5" />
+                            <input type="number" asp-for="Loan.LoanInterest" class="form-control" value="@Model.Loan.LoanInterest" placeholder="Loan Interest" min="1" step=".5" max="30"/>
                         </div>
-                       
+
 
                         @if (Model.Loan.PMIRequired == false)
                         {
@@ -56,8 +63,9 @@
                                 <label asp-for="Loan.PMIRate">PMI Rate</label>
                                 <input type="number" asp-for="Loan.PMIRate" class="form-control" value="@Model.Loan.PMIRate" placeholder="PMI Rate" min="0" step=".1" max="2" />
 
-                                <label asp-for="Loan.PMIRequired">PMI?</label>
+
                                 <input type="checkbox" asp-for="Loan.PMIRequired" class="form-control" value="@Model.Loan.PMIRequired" />
+                                <label asp-for="Loan.PMIRequired">PMI?</label>
 
                             </div>
 
@@ -69,8 +77,9 @@
                                 <label asp-for="Loan.PMIRate">PMI Rate</label>
                                 <input type="number" asp-for="Loan.PMIRate" class="form-control" value="@Model.Loan.PMIRate" placeholder="PMI Rate" min="0.2" step=".1" max="2" />
 
+
+                                <input type="checkbox" asp-for="Loan.PMIRequired" class="form-control" value="@Model.Loan.PMIRequired" checked />
                                 <label asp-for="Loan.PMIRequired">PMI?</label>
-                                <input type="checkbox" asp-for="Loan.PMIRequired" class="form-control" value="@Model.Loan.PMIRequired" checked/>
 
                             </div>
                         }

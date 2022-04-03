@@ -7,6 +7,7 @@ namespace MortgageCalculator.Models
 {
     public class Loan
     {
+        public decimal TotalMortgageCost { get; set; }
         public decimal LoanAmount { get; set; }
         public int LoanTerm { get; set; }
 
