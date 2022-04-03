@@ -8,7 +8,7 @@ namespace MortgageCalculator.Helpers
 {
     public class MortgageHelper
     {
-
+        //TODO PMI calc - optional?
         #region Get Payments
         public Loan GetPayments(Loan loan)
         {
