@@ -8,33 +8,17 @@ namespace MortgageCalculator.Helpers
 {
     public class MortgageHelper
     {
+
         //TODO PMI calc - optional?
         #region Get Payments
         public Loan GetPayments(Loan loan)
         {
             loan.LoanAmount = loan.TotalMortgageCost - loan.PayDown;
 
-
-            decimal avoidPMI = loan.TotalMortgageCost * 0.2m;
-            loan.LoanAmount -= loan.PayDown;
-
-            if (loan.PayDown < avoidPMI)
-            {
-                decimal PMIAmount = loan.PMIRate * loan.LoanAmount;
-                loan.PMIRequired = true;
-                loan.LoanAmount += PMIAmount;
-            }
-            else
-            {
-               
-                loan.PMIRequired = false;
-            }
-
-
             // calc monthly payments
             loan.Payment = CalculateMonthlyPayment(loan.LoanAmount, loan.LoanInterest, loan.LoanTerm);
-
-
+            
+     
             var balance = loan.LoanAmount;
             var totalInterest = 0m;
             var monthlyInterest = 0m;
@@ -43,8 +27,6 @@ namespace MortgageCalculator.Helpers
 
             for (int month = 1; month <= loan.LoanTerm; month++)
             {
-
-
                 monthlyInterest = CalculateMonthlyInterest(balance, monthlyRate);
                 totalInterest += monthlyInterest;
                 monthlyPrincipal = loan.Payment - monthlyInterest;
@@ -69,7 +51,6 @@ namespace MortgageCalculator.Helpers
         #endregion
 
      
-
         #region Monthly Payment Calculation
         private decimal CalculateMonthlyPayment(decimal loanAmount, decimal rate, int loanTerm)
         {
@@ -81,7 +62,7 @@ namespace MortgageCalculator.Helpers
 
 
             return Convert.ToDecimal(paymentD);
-        } 
+        }
         #endregion
 
         #region rate
@@ -95,7 +76,7 @@ namespace MortgageCalculator.Helpers
         private decimal CalculateMonthlyInterest(decimal balance, decimal monthlyRate)
         {
             return balance * monthlyRate;
-        } 
+        }
         #endregion
     }
 }

@@ -12,6 +12,8 @@ namespace MortgageCalculator.Models
         public int LoanTerm { get; set; }
 
         public bool PMIRequired { get; set; }
+
+        public decimal PMI { get; set; }
         public decimal PMIRate { get; set; }
         public decimal PayDown { get; set; }
         public decimal LoanInterest { get; set; }

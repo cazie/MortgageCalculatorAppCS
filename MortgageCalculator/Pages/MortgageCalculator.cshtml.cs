@@ -24,9 +24,10 @@ namespace MortgageCalculator.Pages
 
         public void OnGet()
         {
+            Loan.TotalMortgageCost = 16000m;
             Loan.LoanTerm = 60;
             Loan.LoanInterest = 3.5m;
-            Loan.LoanAmount = 1000m;
+            
             Loan.PayDown = 0m;
             Loan.Payment = 0m;
             Loan.TotalInterest = 0m;
@@ -44,6 +45,7 @@ namespace MortgageCalculator.Pages
             }
 
             _mortgageHelper.GetPayments(Loan);
+            Loan.PMI = Loan.PMIRate * Loan.LoanAmount;
 
             return Page();
         }

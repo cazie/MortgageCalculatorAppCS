@@ -14,34 +14,18 @@
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers">
-                <code class="language-javascript">
+                    <code class="language-javascript">
                         public class MortgageHelper
                         {
 
+                        //TODO PMI calc - optional?
                         #region Get Payments
                         public Loan GetPayments(Loan loan)
                         {
-
+                        loan.LoanAmount = loan.TotalMortgageCost - loan.PayDown;
 
                         // calc monthly payments
                         loan.Payment = CalculateMonthlyPayment(loan.LoanAmount, loan.LoanInterest, loan.LoanTerm);
-
-
-
-                        decimal avoidPMI = loan.LoanAmount * 0.2m;
-                        loan.LoanAmount -= loan.PayDown;
-
-                        if (loan.PayDown < avoidPMI)
-                        {
-                        decimal PMIAmount = loan.PMIRate * loan.LoanAmount;
-                        loan.PMIRequired = true;
-                        loan.LoanAmount += PMIAmount;
-                        }
-                        else
-                        {
-                        loan.PMIRequired = false;
-                        }
-
 
 
                         var balance = loan.LoanAmount;
@@ -52,8 +36,6 @@
 
                         for (int month = 1; month <= loan.LoanTerm; month++)
                         {
-
-
                         monthlyInterest = CalculateMonthlyInterest(balance, monthlyRate);
                         totalInterest += monthlyInterest;
                         monthlyPrincipal = loan.Payment - monthlyInterest;
@@ -76,7 +58,6 @@
                         return loan;
                         }
                         #endregion
-
 
 
                         #region Monthly Payment Calculation
@@ -113,12 +94,41 @@
 
             </div>
             <div class="col-lg-4">
-                <p>the Code is stuctured in in several functions.</p>
-                <h5>Loan Calculaor</h5>
+                <p>The Code is stuctured in in several functions.</p>
+                <h5>Mortgage Calculator</h5>
                 <p>Calculate the amortization of a loan over a period of time</p>
+                <p> <b>Total Loan:</b> Property Price - Down Payment</p>
+                <p> <b>Loan Term: </b>Length of Loan in months</p>
+                <p><b>Loan Interest:</b> annual rate/ 12</p>
+
+                    <u>Monthly Payments</u>: Loan / Loan Term
+
+                    <h5>Break Down:</h5>
+                    <div class="bg-success counter-block m-t-10 p-20">
+                        <div class="row">
+                            <div class="col-12 py-2">
+
+                                Formula Used
+
+                                <p> M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1]</p>
+                                <ul>
+
+
+                                    <li>P = principal loan amount</li>
+
+                                    <li>i = monthly interest rate</li>
+
+                                    <li>n = number of months required to repay the loan</li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+
             </div>
-        </div>
-    </div>
+                    </div>
+                </div>
 </main>
 @section scripts{
 
